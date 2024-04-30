@@ -27,6 +27,7 @@ defmodule CurrencyFormatter do
 
   """
   @spec format(String.t() | number | atom, String.t()) :: String.t()
+  @spec format(String.t() | number | atom, String.t(), Keyword.t()) :: String.t()
   def format(number, currency, opts \\ [])
 
   def format(number, currency, opts) when is_atom(currency) do
@@ -62,7 +63,7 @@ defmodule CurrencyFormatter do
         safe: [
           60,
           "span",
-          [[32, "class", 61, 34, "currency-formatter-symbol", 34]],
+          [" class=\\"", "currency-formatter-symbol", 34],
           62,
           "€",
           60,
@@ -73,7 +74,7 @@ defmodule CurrencyFormatter do
         safe: [
           60,
           "span",
-          [[32, "class", 61, 34, "currency-formatter-amount", 34]],
+          [" class=\\"", "currency-formatter-amount", 34],
           62,
           "1.234,56",
           60,
@@ -352,7 +353,7 @@ defmodule CurrencyFormatter do
   end
 
   defp wrap(class, text) do
-    Phoenix.HTML.Tag.content_tag(:span, text, class: class)
+    PhoenixHTMLHelpers.Tag.content_tag(:span, text, class: class)
   end
 
   @spec get_symbol(map, keyword | nil) :: String.t()
