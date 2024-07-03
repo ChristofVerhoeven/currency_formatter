@@ -26,8 +26,8 @@ defmodule CurrencyFormatter do
       "A$1,234.56"
 
   """
-  @spec format(String.t() | number | atom, String.t()) :: String.t()
-  @spec format(String.t() | number | atom, String.t(), Keyword.t()) :: String.t()
+  @spec format(String.t() | number, String.t() | atom) :: String.t()
+  @spec format(String.t() | number, String.t() | atom, Keyword.t()) :: String.t()
   def format(number, currency, opts \\ Keyword.new())
 
   def format(number, currency, opts) when is_atom(currency) do
