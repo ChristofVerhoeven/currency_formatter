@@ -7,7 +7,7 @@ defmodule CurrencyFormatter.Mixfile do
       version: "0.8.1",
       description: "A library to help with formatting a number to a currency using iso standards and other convenience functions related to formatting currencies",
       package: package(),
-      elixir: "~> 1.15",
+      elixir: "~> 1.16",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps: deps(),
@@ -39,7 +39,7 @@ defmodule CurrencyFormatter.Mixfile do
 
   defp deps do
     [
-      {:dialyxir, ">= 0.0.0", only: :dev},
+      {:dialyxir, ">= 0.0.0", only: :dev, runtime: false},
       {:earmark, ">= 0.0.0", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:excoveralls, ">= 0.0.0", only: :test},
