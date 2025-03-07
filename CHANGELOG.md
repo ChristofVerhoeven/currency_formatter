@@ -1,3 +1,12 @@
+## 0.8.3 (2025-03-07)
+- added credo as dev/test dependency
+- added .formatter.exs and fixed formatting
+- fixed warning for elixir 1.18
+- swapped poison dependency for jason
+
+## 0.8.2 (2024-07-03)
+- dependency updates for phoenix_html 4 and elixir 1.15
+
 ## 0.8.1 (2018-08-24)
 - bumped deps
 

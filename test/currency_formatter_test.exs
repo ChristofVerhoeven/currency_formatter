@@ -34,7 +34,7 @@ defmodule CurrencyFormatterTest do
     assert "$0.12" == CurrencyFormatter.format(12, :usd)
     assert "$1.23" == CurrencyFormatter.format(123, :usd)
     assert "$12.34" == CurrencyFormatter.format(1234, :usd)
-    assert "$123.45" == CurrencyFormatter.format(12345, :usd)
+    assert "$123.45" == CurrencyFormatter.format(12_345, :usd)
     assert "$1,234.56" == CurrencyFormatter.format(123_456, :usd)
     assert "$1,000" == CurrencyFormatter.format(100_000, :usd)
     assert "$-1,000" == CurrencyFormatter.format(-100_000, :usd)
@@ -44,7 +44,7 @@ defmodule CurrencyFormatterTest do
     assert "$1,234,567.89" == CurrencyFormatter.format(123_456_789, :usd)
     assert "$12,345,678.90" == CurrencyFormatter.format(1_234_567_890, :usd)
     assert "$-113,728" == CurrencyFormatter.format(-11_372_800, :usd)
-    assert "$-499" == CurrencyFormatter.format(-49900, :usd)
+    assert "$-499" == CurrencyFormatter.format(-49_900, :usd)
     assert "$1" == CurrencyFormatter.format(100, :usd)
     assert "$1.00" == CurrencyFormatter.format(100, :usd, keep_decimals: true)
   end
@@ -54,7 +54,7 @@ defmodule CurrencyFormatterTest do
     assert "€0,12" == CurrencyFormatter.format(12, :eur)
     assert "€1,23" == CurrencyFormatter.format(123, :eur)
     assert "€12,34" == CurrencyFormatter.format(1234, :eur)
-    assert "€123,45" == CurrencyFormatter.format(12345, :eur)
+    assert "€123,45" == CurrencyFormatter.format(12_345, :eur)
     assert "€1.234,56" == CurrencyFormatter.format(123_456, :eur)
     assert "€1.000" == CurrencyFormatter.format(100_000, :eur)
     assert "€-1.000" == CurrencyFormatter.format(-100_000, :eur)
@@ -64,7 +64,7 @@ defmodule CurrencyFormatterTest do
     assert "€1.234.567,89" == CurrencyFormatter.format(123_456_789, :eur)
     assert "€12.345.678,90" == CurrencyFormatter.format(1_234_567_890, :eur)
     assert "€-113.728" == CurrencyFormatter.format(-11_372_800, :eur)
-    assert "€-499" == CurrencyFormatter.format(-49900, :eur)
+    assert "€-499" == CurrencyFormatter.format(-49_900, :eur)
     assert "€1" == CurrencyFormatter.format(100, :eur)
     assert "€1,00" == CurrencyFormatter.format(100, :eur, keep_decimals: true)
   end
@@ -72,6 +72,7 @@ defmodule CurrencyFormatterTest do
   test "should return html" do
     assert ~s[<span class="currency-formatter-symbol">€</span><span class="currency-formatter-amount">1.234</span>] ==
              CurrencyFormatter.raw_html_format(123_400, :eur)
+
     assert ~s[<span class="currency-formatter-symbol">€</span><span class="currency-formatter-amount">1.234,00</span>] ==
              CurrencyFormatter.raw_html_format(123_400, :eur, keep_decimals: true)
   end
@@ -98,11 +99,15 @@ defmodule CurrencyFormatterTest do
     assert "US$12.34" == CurrencyFormatter.format(1234, :usd, disambiguate: true)
     assert "C$12.34" == CurrencyFormatter.format(1234, :cad, disambiguate: true)
     assert "C$12" == CurrencyFormatter.format(1200, :cad, disambiguate: true)
-    assert "C$12.00" == CurrencyFormatter.format(1200, :cad, disambiguate: true, keep_decimals: true)
+
+    assert "C$12.00" ==
+             CurrencyFormatter.format(1200, :cad, disambiguate: true, keep_decimals: true)
 
     assert "$12.34" == CurrencyFormatter.format(1234, :usd, disambiguate: false)
     assert "$12" == CurrencyFormatter.format(1200, :cad, disambiguate: false)
-    assert "$12.00" == CurrencyFormatter.format(1200, :cad, disambiguate: false, keep_decimals: true)
+
+    assert "$12.00" ==
+             CurrencyFormatter.format(1200, :cad, disambiguate: false, keep_decimals: true)
   end
 
   test "should return a map with formatting instructions" do
