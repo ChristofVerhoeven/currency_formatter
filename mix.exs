@@ -4,12 +4,13 @@ defmodule CurrencyFormatter.Mixfile do
   def project do
     [
       app: :currency_formatter,
-      version: "0.8.2",
-      description: "A library to help with formatting a number to a currency using iso standards and other convenience functions related to formatting currencies",
+      version: "0.8.3",
+      description:
+        "A library to help with formatting a number to a currency using iso standards and other convenience functions related to formatting currencies",
       package: package(),
       elixir: "~> 1.16",
-      build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       deps: deps(),
       dialyzer: [
         plt_add_deps: true,
@@ -18,8 +19,8 @@ defmodule CurrencyFormatter.Mixfile do
           :error_handling,
           :race_conditions,
           :unknown,
-          :unmatched_returns,
-        ],
+          :unmatched_returns
+        ]
       ],
       preferred_cli_env: [
         coveralls: :test,
@@ -39,22 +40,24 @@ defmodule CurrencyFormatter.Mixfile do
 
   defp deps do
     [
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, ">= 0.0.0", only: :dev, runtime: false},
       {:earmark, ">= 0.0.0", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:excoveralls, ">= 0.0.0", only: :test},
       {:phoenix_html, "~> 4.0"},
       {:phoenix_html_helpers, "~> 1.0"},
-      {:poison, "~> 5.0"},
+      {:poison, "~> 5.0"}
     ]
   end
+
   defp package do
     [
-      maintainers: ["Gerard de Brieder"],
+      maintainers: ["Gerard de Brieder", "Christof Verhoeven"],
       licenses: ["WTFPL"],
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
       links: %{
-        "GitHub" => "https://github.com/smeevil/currency_formatter",
+        "GitHub" => "https://github.com/ChristofVerhoeven/currency_formatter",
         "Docs" => "http://smeevil.github.io/currency_formatter/"
       }
     ]

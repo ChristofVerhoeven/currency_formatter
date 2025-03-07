@@ -40,7 +40,8 @@ defmodule CurrencyFormatter do
     |> format(currency, opts)
   end
 
-  def format(number_string, currency, opts) when is_binary(number_string) and is_binary(currency) do
+  def format(number_string, currency, opts)
+      when is_binary(number_string) and is_binary(currency) do
     format = instructions(currency)
 
     number_string
@@ -327,6 +328,7 @@ defmodule CurrencyFormatter do
   @spec set_symbol(String.t(), map, Keyword.t()) :: String.t()
   defp set_symbol(number_string, %{"symbol_first" => true} = config, opts) do
     symbol = get_symbol(config, opts)
+
     if Keyword.get(opts, :html) do
       wrap_in_spans(symbol: symbol, amount: number_string)
     else
@@ -335,11 +337,12 @@ defmodule CurrencyFormatter do
   end
 
   defp set_symbol(number_string, config, opts) do
+    symbol = get_symbol(config, opts)
+
     if Keyword.get(opts, :html) do
-      spans = wrap_in_spans(amount: number_string, symbol: get_symbol(config, opts))
-      Phoenix.HTML.safe_to_string(spans)
+      wrap_in_spans(amount: number_string, symbol: symbol)
     else
-      number_string <> get_symbol(config, opts)
+      number_string <> symbol
     end
   end
 
